@@ -1,41 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta property="og:title" content="Personal Portfolio" />
-    <meta property="og:description" content="My Personal Portfolio" />
-    <meta property="og:url" content="{{ url }}" />
+	<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	/>
+	<meta property="og:title" content="Personal Portfolio" />
+	<meta property="og:description" content="My Personal Portfolio" />
+	<meta property="og:url" content="{{ url }}" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+		rel="stylesheet"
+	/>
 
-    <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
-    <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
-    <title>{{ title }}</title>
-  </head>
+	<link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
+	<link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <body>
-    <header class="nav-bar">
+	{% block head %} {% endblock %}
+	<title>{{ title }}</title>
+</head>
+
+  <body style="background-color: #ebe7df ">
+
+	  
+	  <!-- <header class="nav-bar">
       <div class="nav-content">
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/hobbies">Hobbies</a>
-        <a href="/map">Map</a>
-        <a href="/">
-          <div class="nav-logo">
-            <img src="./static/img/logo.svg" />
-          </div>
-        </a>
-      </div>
-    </header>
+		  <a href="/">Home</a>
+		  <a href="/about">About Us</a>
+		  <a href="/hobbies">Hobbies</a>
+		  <a href="/map">Map</a>
+		  <a href="/">
+			  <div class="nav-logo">
+				  <img src="./static/img/logo.svg" />
+				</div>
+			</a>
+		</div>
+    </header> -->
+	<!--Header-->
+	<div class="container">
+		<div class="d-flex flex-column align-items-center justify-content-center border-bottom border-secondary my-0 py-0">
+			<div class="d-flex align-items-center justify-content-center">
+				<i class="fa fa-linkedin text-muted fs-6 fw-light pt-3 px-2" aria-hidden="true"></i>
+				<a href="https://www.linkedin.com/in/lucas-cancio-b24581216/" style="text-decoration: none">
+					<p class="text-muted fw-light pt-3 me-4 mb-0 fs-6" >lucas-cancio-b24581216</p>
+				</a>
+				<i class="fa fa-envelope-o text-muted fs-6 fw-light pt-3 px-2" aria-hidden="true"></i>
+				<p class="pt-3 mb-0 text-muted fs-6 fw-light">lucas.canciox1@gmail.com</p>
+			</div>
+			<header class="d-flex flex-wrap align-items-center justify-content-center py-1 mb-2">
+				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 pt-1">
+					<li><a href="/" class="nav-link px-4 link-secondary fs-6">Home</a></li>
+					<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
+					<li><a href="/my-work" class="nav-link px-4 link-dark fs-6">My Work</a></li>
+					<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
+					<li><a href="/about" class="nav-link px-4 link-dark fs-6">About Me</a></li>
+					<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
+					<li><a href="/contact" class="nav-link px-4 link-dark fs-6">Contact</a></li>
+				</ul>
+			</header>
+
+		</div>
+	</div>
+
     {% block content %} {% endblock %}
   </body>
 </html>
