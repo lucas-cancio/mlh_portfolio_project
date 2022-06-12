@@ -55,16 +55,35 @@
 					{% set active_page = active_page|default('index') -%}
 					
 					{% for href, id, caption in navigation_bar %}
-						{% if (id != 'home') %}
+						{% if (id != 'home' and id != 'contact') %}
 							<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
+							<li>
+								<a href="{{ href|e }}"
+									{% if id == active_page %} class="nav-link px-3 link-secondary fs-6"
+									{% else %} class="nav-link px-3 link-dark fs-6"{% endif %}>
+									{{ caption }}
+								</a>
+							</li>
 						{% endif %}
-						<li>
-							<a href="{{ href|e }}"
-								{% if id == active_page %} class="nav-link px-3 link-secondary fs-6"
-								{% else %} class="nav-link px-3 link-dark fs-6"{% endif %}>
-								{{ caption }}
-							</a>
-						</li>
+						{% if (id == 'home') %}
+							<li>
+								<a href="{{ href|e }}"
+									{% if id == active_page %} class="nav-link ps-0 pe-3 link-secondary fs-6"
+									{% else %} class="nav-link ps-0 pe-3 link-dark fs-6"{% endif %}>
+									{{ caption }}
+								</a>
+							</li>
+						{% endif %}
+						{% if (id == 'contact') %}
+							<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
+							<li>
+								<a href="{{ href|e }}"
+									{% if id == active_page %} class="nav-link ps-3 pe-0 link-secondary fs-6"
+									{% else %} class="nav-link ps-3 pe-0 link-dark fs-6"{% endif %}>
+									{{ caption }}
+								</a>
+							</li>
+						{% endif %}
 					{% endfor %}
 			</header>
 
