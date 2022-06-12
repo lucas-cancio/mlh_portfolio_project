@@ -42,7 +42,7 @@ class ContactMethod:
 projects = [Project(
             _title = "ShadowMe Web App",
             _id = "ShadowMe",
-            _descriptions = [{"title": "What is it?", "content": "So far it is a web app I created with account creation and login authorization functionality. Its ultimate purpose is to connect students with shadowing opportunites."},
+            _descriptions = [{"title": "What is it?", "content": "So far, it is a web app I created with account creation and login authorization functionality. Its ultimate purpose is to connect students with shadowing opportunites."},
                             {"title": "What I Used?", "content": "I used a JavaScript tech stack with React.js and Node.js for the front and back end, and MySQL for the database."}],
             _siteURL = "https://shadowme-app.herokuapp.com/",
             _githubURL = "https://github.com/lucas-cancio/ShadowMe",
