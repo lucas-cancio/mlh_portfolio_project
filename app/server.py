@@ -5,57 +5,102 @@ from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
 
-class Person:
-    def __init__(self, _name, _hobbies, _workExperience, _education, _aboutMe, _travelMapURL, _profileImageURL="./static/img/logo.jpg"):
-        self.name = _name
-        self.hobbies = _hobbies
-        self.workExperience = _workExperience
-        self.education = _education
-        self.aboutMe = _aboutMe
-        self.travelMapURL = _travelMapURL
-        self.profileImageURL = _profileImageURL
 
-class WorkExperience:
-    def __init__(self, _startDate, _endDate, _organization, _role, _roleDescriptions = ""):
+
+class Experience:
+    def __init__(self, _startDate, _endDate, _organization, _role, _roleDescription = ""):
         self.startDate = _startDate
         self.endDate = _endDate
         self.organization = _organization
         self.role = _role
-        self.roleDescription = _roleDescriptions
+        self.roleDescription = _roleDescription
 
 class Education:
     def __init__(self, _institution, _completionDate, _degree):
         self.institution = _institution
         self.completionDate = _completionDate
         self.degree = _degree
-
-class Hobby:
-    def __init__(self, _name, _pictureURLs = "", _description = ""):
-        self.name = _name
-        self.pictureURLs = _pictureURLs
-        self.description = _description
-
+        
 class Project:
-    def __init__(self, _title = "Project #", _pictureURLS = [], _description = "", _siteURL = "", _githubURL = ""):
+    def __init__(self, _title = "Project #", _id = "Project#", _descriptions = [], _siteURL = "", _githubURL = "", _pictureURLs = [], _miscURLs = [{"linkName": "", "url": ""}]):
         self.title = _title
-        self.pictureURLs = _pictureURLS
-        self.description = _description
+        self.id = _id
+        self.descriptions = _descriptions
         self.siteURL = _siteURL
         self.githubURL = _githubURL
+        self.pictureURLs = _pictureURLs
+        self.miscURLs = _miscURLs
 
-def GetPeople():
-    Lucas = Person("Lucas Cancio"
-                , [Hobby("game development", ["./static/img/lucas/gameDev02.PNG", "./static/img/lucas/gameDev03.PNG"], "I enjoy making games, mainly the programming aspect since I am not the best artist. You can check out some of the things I have made on my Itch.io page.")
-                    , Hobby("martial arts", ["./static/img/lucas/tkd.PNG"], "I like doing different forms of martial arts, including Taekwondo, Brazilian Jiu Jitsu, and kick boxing.")
-                    , Hobby("outdoors stuff", ["./static/img/lucas/outdoors01.jpg", "./static/img/lucas/outdoors02.jpg", "./static/img/lucas/outdoors03.jpg"], "I enjoy biking and hiking in a nature park near my home.")]
-                , [WorkExperience("May 2020", "August 2020", "TheCoderSchool", "Programming Tutor", "I tutored kids on how to program using C++, Python, and Scratch.")
-                    , WorkExperience("June 2021", "September 2021", "Machine Intelligence Lab @ UF", "Undergraduate Researcher", "I mainly focused on documenting an autonomous submarine's simulation software.")]
-                , [Education("University of Florida", "May 2023", "Bachelor's of Science in Computer Science")]
-                , "Hello everyone! I am a 4th year CS major at University of Florida in the USA. I am pursuing becoming a professional software developer with a focus on web development. From what I have learned so far from this program, I am now also considering being a production engineer. I love programming and the power it gives me to create things like games and what ever cool app ideas I can imagine."
-                , ""
-                , "./static/img/lucas/lucas.jpg")
-                
-    return Lucas
+class ContactMethod:
+    def __init__(self, _name, _value = "", _linkURL = "", _iconName = ""):
+        self.name = _name
+        self.value = _value
+        self.linkURL = _linkURL
+        self.iconName = _iconName
+
+
+projects = [Project(
+            _title = "ShadowMe Web App",
+            _id = "ShadowMe",
+            _descriptions = [{"title": "What is it?", "content": "So far it is a web app I created with account creation and login authorization functionality. Its ultimate purpose is to connect students with shadowing opportunites."},
+                            {"title": "What I Used?", "content": "I used a JavaScript tech stack with React.js and Node.js for the front and back end, and MySQL for the database."}],
+            _siteURL = "https://shadowme-app.herokuapp.com/",
+            _githubURL = "https://github.com/lucas-cancio/ShadowMe",
+            _pictureURLs = ["./static/img/projects/ShadowMe/LoginPage.PNG",
+                            "./static/img/projects/ShadowMe/CreateAccountPage.PNG"],
+            _miscURLs = [{"linkName": "" ,"url": ""}]),
+            Project(
+            _title = "CaffeineCulator Web App",
+            _id = "CaffeineCulator",
+            _descriptions = [{"title": "What is it?", "content": "A web app that tracks your daily caffeine consumption. I collaborated in a group of 3 for a hackathon."},
+                            {"title": "How I contributed?", "content": "I constructed the backend and frontend by routing the webcam data to the server's barcode scanner and decoder, and forwarding the corresponding nutrition information back to the frontend for display by using JavaScript, Python, and Flask"}],
+            _siteURL = "https://caffeineculator.pythonanywhere.com/",
+            _githubURL = "https://github.com/chisafukutome/caffeine-detector-project",
+            _pictureURLs = ["./static/img/projects/CaffeineCulator/HomePage.PNG",
+                            "./static/img/projects/CaffeineCulator/ScanningPage.PNG",
+                            "./static/img/projects/CaffeineCulator/ReceiptPage.PNG"],
+            _miscURLs = [{"linkName": "Devpost" ,"url": "https://devpost.com/software/caffeineculator"}]),
+            Project(
+            _title = "Game Development Projects",
+            _id = "GameDev",
+            _descriptions = [{"title": "What I do?", "content": "I am a hobbyist game developer with a particular affinity for the programming aspect of making games. "},
+                            {"title": "What I use?", "content": "I primarily use the Unity engine, which uses C# for scripting."},
+                            {"title": "What I have made?", "content": "I have made games for both personal projects and school projects. I have also published Unity packages to the Unity Asset Store for other creators to use."}],
+            _siteURL = "",
+            _githubURL = "",
+            _pictureURLs = ["./static/img/projects/GameDev/CarnageContainment03.PNG",
+                            "./static/img/projects/GameDev/UnityPackage.PNG",
+                            "./static/img/projects/GameDev/Skator02.PNG",
+                            "./static/img/projects/GameDev/CarnageContainment04.PNG"],
+            _miscURLs = [{"linkName": "my Itch.io page" ,"url": "https://lucascancio.itch.io/"},
+                        {"linkName": "my Unity package" ,"url": "https://assetstore.unity.com/packages/tools/ai/navmesh-link-placer-223521"}]),
+            Project(
+            _title = "Portfolio Site",
+            _id = "PortfolioSite",
+            _descriptions = [{"title": "What is it?", "content": "This is my portfolio website, which exhibits information about my work experience, education, projects, and much more."},
+                            {"title": "How I made it?", "content": "I used Python's Flask framework for the backend and Jinja templates for the frontend."},
+                            {"title": "Why I made it?", "content": "I was prompted to make this site for MLH's production engineering fellowship program. I also wanted to make this site before the program, because it was good practice and elegantly displayed important information about me and my qualifications."}],
+            _siteURL = "http://lucas-cancio.duckdns.org:5000/",
+            _githubURL = "https://github.com/lucas-cancio/mlh_portfolio_project",
+            _pictureURLs = ["./static/img/projects/PortfolioSite/HomePagePNG.PNG",
+                            "./static/img/projects/PortfolioSite/MyWorkPage.PNG"],
+            _miscURLs = [])]
+
+experiences = [Experience(_startDate = "June 2021",
+                        _endDate = "September 2021",
+                        _organization = "Machine Intelligence Lab @ UF",
+                        _role = "Undergraduate Researcher", 
+                        _roleDescription = "Documented the functionalities of an autonomous submarine's simulation software that used Python, XML, ROS, and Gazebo. I also implemented different launch options for toggling the submarine's simulated or real cameras during the simulation."),
+                Experience(_startDate = "May 2020",
+                        _endDate = "August 2020",
+                        _organization = "TheCoderSchool",
+                        _role = "Programming Tutor",
+                        _roleDescription = "I tutored kids, ages 8 to 17, on how to program using C++, Python, and Scratch. I also taught and led kids during programming-oriented summer camps.")]
+
+contactMethods = [ContactMethod("E-mail", "lucas.canciox1@gmail.com", "", "fa fa-envelope-open-o"),
+                    ContactMethod("LinkedIn", "lucas-cancio-b24581216", "https://www.linkedin.com/in/lucas-cancio-b24581216/", "fa fa-linkedin-square "),
+                    ContactMethod("GitHub", "lucas-cancio", "https://github.com/lucas-cancio", "fa fa-github"),
+                    ContactMethod("Discord", "Lucas Cancio#3138", "", "bi bi-discord ")]          
 
 @app.route('/')
 def index():
@@ -63,7 +108,7 @@ def index():
 
 @app.route('/my-work')
 def my_work():
-    return render_template('my-work.html', title="My Work", url=os.getenv("URL"))
+    return render_template('my-work.html', title="My Work", projects=projects, experiences=experiences, url=os.getenv("URL"))
 
 @app.route('/about')
 def about():
@@ -71,4 +116,4 @@ def about():
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html', title="Contact", url=os.getenv("URL"))
+    return render_template('contact.html', title="Contact", contactMethods = contactMethods, url=os.getenv("URL"))
