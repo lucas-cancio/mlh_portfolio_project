@@ -100,7 +100,11 @@ experiences = [Experience(_startDate = "June 2021",
 contactMethods = [ContactMethod("E-mail", "lucas.canciox1@gmail.com", "", "fa fa-envelope-open-o"),
                     ContactMethod("LinkedIn", "lucas-cancio-b24581216", "https://www.linkedin.com/in/lucas-cancio-b24581216/", "fa fa-linkedin-square "),
                     ContactMethod("GitHub", "lucas-cancio", "https://github.com/lucas-cancio", "fa fa-github"),
-                    ContactMethod("Discord", "Lucas Cancio#3138", "", "bi bi-discord ")]          
+                    ContactMethod("Discord", "Lucas Cancio#3138", "", "bi bi-discord ")]  
+
+educations = [Education("University of Florida", "May 2023", "Bachelor's of Science in Computer Science")]        
+
+skills = ["JavaScript", "Flask", "Python", "React", "NodeJS", "MySQL", "C++", "HTML", "CSS", "Git", "Linux"]
 
 @app.route('/')
 def index():
@@ -112,7 +116,7 @@ def my_work():
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title="About", url=os.getenv("URL"))
+    return render_template('about.html', title="About", educations=educations, skills=skills, url=os.getenv("URL"))
 
 @app.route('/contact')
 def contact():

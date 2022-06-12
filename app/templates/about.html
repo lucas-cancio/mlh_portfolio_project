@@ -2,5 +2,43 @@
 {% set active_page = "about" %}
 
 {% block content %} 
-    
+    <div class="container col-xxl-9 px-4 pt-5 mt-5">
+        <div class="row d-flex flex-lg-row align-items-center justify-content-center flex-wrap-reverse g-5 py-0 mb-5">
+            <img src="./static/img/lucas/lucas02.jpg" class="col-10 col-sm-8 col-lg-4 my-3 d-block mx-lg-auto img-fluid rounded-5" alt="Bootstrap Themes" width="200" height="300" loading="lazy">
+            <div class="col-lg-8 d-flex flex-column align-items-center text-center mt-2">
+                <h1 class="display-5 fw-bold lh-1 mb-3">About Me</h1>
+                <p class="lead">I am a 4th year computer science major at the University of Florida. I am pursuing becoming a professional software developer with a focus on web development. I love programming and the power it gives me to create things like games, tools, and any cool programs I can imagine. I enjoy learning about new technologies and how to improve my skills, which is important since I will always have a lot more to learn. I am currently looking for internship and full-time opportunities to both learn and get hands-on work on real projects I find fulfilling.</p>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-around align-items-start">
+
+            <!-- Education -->
+            <div class="col-lg-8 d-flex flex-column justify-content-center align-items-start">
+                <h1 class="pt-3 pb-1 mb-4 ps-5"><strong>Education</strong></h1>
+                {% for education in educations %}
+                    <div class="d-flex flex-column w-100 p-3 me-4 mb-5 bg-light rounded">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class=""><strong>{{education.degree}}</strong></h4>
+                            <p class="fw-semibold">{{education.completionDate}}</p>
+                        </div>
+                        <p class="fs-5"><strong>{{education.institution}}</strong></p>
+                        <!-- <p class="fs-6 col-lg-8 px-3">{{education.roleDescription}}</p> -->
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Skills -->
+            <div class="col-lg-4 d-flex flex-column justify-content-start align-items-center">
+                <h1 class="pt-3 pb-1 mb-3"><strong>Skills</strong></h1>
+                <div class="d-flex flex-wrap justify-content-center align-items-center mb-5">
+                    {% for skill in skills %}
+                        <div class="rounded m-2 p-0" style="background-color: #85775f;">
+                            <p class="text-center p-2 m-0 text-white">{{skill}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
