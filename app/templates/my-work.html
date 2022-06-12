@@ -1,0 +1,130 @@
+{% extends "layout.html" %} 
+{% set active_page = "my-work" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %} 
+
+<div class="container col-xxl-12 px-4 pt-2 pb-5">
+
+    <!-- Projects -->
+    <div class="d-flex flex-column align-items-center justify-content-center">     
+
+        <h1 class="pt-3 pb-1 mb-0"><strong>My Projects</strong></h1>
+        <div class="d-flex flex-wrap align-items-start justify-content-center mb-4">
+
+            {% for project in projects %}
+
+                <div class="col-lg-5 my-5 mx-4 d-flex flex-column align-items-center justify-content-start" style="height: 500px;">
+                    <h2 class="fw-normal pt-2">{{project.title}}</h2>
+
+                    <!--Image Carousel-->
+                    <div id="{{project.id}}-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for pictureURL in project.pictureURLs %}
+                                {% if pictureURL == project.pictureURLs[0] %}
+                                    <div class="carousel-item active" data-bs-interval="10000">
+                                        <img src="{{pictureURL}}" class="rounded w-100" alt="...">
+                                    </div>              
+                                {% else %}
+                                    <div class="carousel-item" data-bs-interval="10000">
+                                        <img src="{{pictureURL}}" class="rounded w-100" alt="...">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#{{project.id}}-carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#{{project.id}}-carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    
+                    <!--Description Carousel-->
+                    <div id="{{project.id}}-description-carousel" class="carousel carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner d-flex flex-column align-items-center justify-content-center">
+                            {% for description in project.descriptions %}
+                                {% if description == project.descriptions[0] %}
+                                    <div class="carousel-item active w-75 px-0 mx-0">
+                                        <p class=" text-center mt-2 mb-1"><strong>{{description.title}}</strong></p>
+                                        <p class=" text-center">{{description.content}}</p>
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item w-75 px-0 mx-0">
+                                        <p class=" text-center mt-2 mb-1"><strong>{{description.title}}</strong></p>
+                                        <p class=" text-center">{{description.content}}</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#{{project.id}}-description-carousel" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#{{project.id}}-description-carousel" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+
+                    <!--Project links-->
+                    <div class="d-flex">
+                        {% if project.siteURL != "" %}
+                            <p><a class="btn btn-secondary mx-2" href={{project.siteURL}}  style="background-color: #85775f;">Visit Site</a></p>
+                        {% endif %}
+                        {% if project.githubURL != "" %}
+                            <p><a class="btn btn-secondary mx-2" href={{project.githubURL}}  style="background-color: #85775f;">Visit GitHub</a></p>
+                        {% endif %}
+                        {% for miscURL in project.miscURLs %}
+                            {% if miscURL.url != "" %}
+                                <p><a class="btn btn-secondary mx-2" href={{miscURL.url}}  style="background-color: #85775f;">Visit {{miscURL.linkName}}</a></p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Experiences and Resume Downloadable -->
+        <div class="d-flex flex-wrap justify-content-around align-items-start">
+            
+            <!-- Experiences -->
+            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                <h1 class="pt-3 pb-1 mb-4 ps-5"><strong>Experience</strong></h1>
+                {% for experience in experiences %}
+                    <div class="d-flex flex-column w-100 p-3 me-4 mb-5 bg-light rounded">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class=""><strong>{{experience.role}}</strong></h4>
+                            <p class="fw-semibold">{{experience.startDate}} - {{experience.endDate}}</p>
+                        </div>
+                        <p class="fs-5"><strong>{{experience.organization}}</strong></p>
+                        <p class="fs-6 col-lg-8 px-3">{{experience.roleDescription}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Resume Downloadable -->
+            <div class="col-lg-3 d-flex flex-column justify-content-start align-items-center">
+                <h1 class="pt-3 pb-1 mb-0"><strong>Resume</strong></h1>
+                <div>
+                    <a href="./static/misc/Resume.pdf" download>
+                        <img class="" width="240px" height="320px" src="./static/img/resume.PNG">
+                    </a>
+                </div>
+                <a href="./static/misc/Resume.pdf" download class="fw-bold fs-5 mt-3 p-2 rounded text-white" style="text-decoration:solid; color:black; background-color: #85775f;">
+                    Download
+                </a>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+{% endblock %}

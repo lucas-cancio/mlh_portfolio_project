@@ -1,0 +1,47 @@
+{% extends "layout.html" %} 
+{% set active_page = "contact" %}
+
+{% block head %}
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"> -->
+{% endblock %}
+
+{% block content %} 
+
+    <div class="container col-xxl-9 px-4 pt-5 d-flex flex-column justify-content-between align-items-center">
+        <h2 class="col-lg-9 text-center my-5" style="font-family: cursive, Apple Chancery;">If you have any inquiries or just want to say 'hi', I would be happy to connect with you.</h2>
+        <h2 class="my-4"></h2> 
+        <h4 class="col-lg-9 text-center my-1" style="font-family: cursive, Apple Chancery;">You can contact me via...</h4>
+        
+        <div class="container px-4 py-3" id="hanging-icons">
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
+
+                {% for contactMethod in contactMethods %}
+                    <div class="col d-flex flex-column align-items-center justify-content-start">
+                        <div class="d-inline-flex align-items-center justify-content-start">
+                            <i class="{{contactMethod.iconName}} fs-4 mb-2 me-2" aria-hidden="true"></i>
+                            <h2>{{contactMethod.name}}</h2>
+                        </div>
+                        {% if contactMethod.linkURL != '' %}
+                            <a href="{{contactMethod.linkURL}}" style="text-decoration:none;" class="link-dark">
+                                <p>{{contactMethod.value}}</p>
+                            </a>                            
+                            <a href="{{contactMethod.linkURL}}" style="text-decoration:none;" class="link-dark">
+                                <p class="rounded text-white p-2 text-center" style="background-color: #85775f;">
+                                    Reach out!
+                                </p>
+                            </a>
+
+                        {% else %}
+                            <p>{{contactMethod.value}}</p>
+                        {% endif%}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
