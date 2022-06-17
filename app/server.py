@@ -68,7 +68,7 @@ projects = [Project(
                             {"title": "What I have made?", "content": "I have made games for both personal projects and school projects. I have also published Unity packages to the Unity Asset Store for other creators to use."}],
             _siteURL = "",
             _githubURL = "",
-            _pictureURLs = ["./static/img/projects/GameDev/CarnageContainment03.PNG",
+            _pictureURLs = ["./static/img/projects/GameDev/CarnageContainment05.PNG",
                             "./static/img/projects/GameDev/UnityPackage.PNG",
                             "./static/img/projects/GameDev/Skator02.PNG",
                             "./static/img/projects/GameDev/CarnageContainment04.PNG"],
