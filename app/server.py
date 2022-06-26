@@ -134,6 +134,7 @@ skills = ["JavaScript", "Flask", "Python", "React", "NodeJS", "MySQL", "C++", "H
 
 def fetch_time_line_posts():
     timeline_posts = requests.get("http://localhost:5000/api/timeline_post")
+    timeline_posts = json.loads(timeline_posts.text)['timeline_posts']
     return timeline_posts
 
 @app.route('/')
@@ -152,26 +153,28 @@ def about():
 def contact():
     return render_template('contact.html', title="Contact", contactMethods = contactMethods, url=os.getenv("URL"))
 
-@app.route('/timeline')
+@app.route('/timeline', methods=["GET", "POST"])
 def timeline():
+    if request.method == 'POST':
+        name = request.form.get("fname")
+        email = request.form.get("femail")
+        content = request.form.get("fcontent")
+        timeline_post_info = {'name': name, 'email': email, 'content': content}
+        new_timeline_post = requests.post("http://localhost:5000/api/timeline_post", timeline_post_info)
+
     timeline_posts = fetch_time_line_posts()
-    # print(str(timeline_posts))
-    timeline_posts = json.loads(timeline_posts.text)['timeline_posts']
-    print(str(timeline_posts))
 
     return render_template('timeline.html', title="Timeline", timeline_posts=timeline_posts)
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     print("Creating new timeline post")
-    name = request.form.get("fname")
-    email = request.form.get("femail")
-    content = request.form.get("fcontent")
+    name = request.form.get("name")
+    email = request.form.get("email")
+    content = request.form.get("content")
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
-    timeline_posts = json.loads(fetch_time_line_posts().text)['timeline_posts']    
-
-    return render_template('timeline.html', title="Timeline", timeline_posts=timeline_posts)
+    return model_to_dict(timeline_post)
 
 
 @app.route('/api/timeline_post', methods=['GET'])
