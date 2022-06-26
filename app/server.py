@@ -1,6 +1,8 @@
 import os
 from flask import Flask, jsonify, render_template, request
+import requests
 from dotenv import load_dotenv
+from itsdangerous import json
 from peewee import *
 from playhouse.shortcuts import model_to_dict
 import datetime
@@ -130,6 +132,11 @@ educations = [Education("University of Florida", "May 2023", "Bachelor's of Scie
 
 skills = ["JavaScript", "Flask", "Python", "React", "NodeJS", "MySQL", "C++", "HTML", "CSS", "Git", "Linux"]
 
+def fetch_time_line_posts():
+    timeline_posts = requests.get("http://localhost:5000/api/timeline_post")
+    timeline_posts = json.loads(timeline_posts.text)['timeline_posts']
+    return timeline_posts
+
 @app.route('/')
 def index():
     return render_template('home.html', title="Home", url=os.getenv("URL"))
@@ -146,14 +153,29 @@ def about():
 def contact():
     return render_template('contact.html', title="Contact", contactMethods = contactMethods, url=os.getenv("URL"))
 
+@app.route('/timeline', methods=["GET", "POST"])
+def timeline():
+    if request.method == 'POST':
+        name = request.form.get("fname")
+        email = request.form.get("femail")
+        content = request.form.get("fcontent")
+        timeline_post_info = {'name': name, 'email': email, 'content': content}
+        new_timeline_post = requests.post("http://localhost:5000/api/timeline_post", timeline_post_info)
+
+    timeline_posts = fetch_time_line_posts()
+
+    return render_template('timeline.html', title="Timeline", timeline_posts=timeline_posts)
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    print("Creating new timeline post")
+    name = request.form.get("name")
+    email = request.form.get("email")
+    content = request.form.get("content")
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
+
 
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
