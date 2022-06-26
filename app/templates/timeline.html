@@ -46,12 +46,12 @@
        
             <div class="d-flex flex-column align-items-center justify-content-start w-75 flex-wrap">
                 <div class="d-flex flex-column align-items-start w-100">
-                    <p>{{timeline_post.created_at[:-12]}}</p>
+                    <p class="mb-1">{{timeline_post.created_at[:-12]}}</p>
                     <div class="rounded w-100" style="background-color: #85775f;">
                         <div class="d-flex flex-column align-items-start justify-content-start w-100" >
                             <div class="d-flex flex-row align-items-center justify-content-between w-100 p-2 m-0">
-                                <p class="m-0">{{timeline_post.name}}</p>
-                                <p class="m-0">{{timeline_post.email}}</p>
+                                <p class="m-0 text-white">{{timeline_post.name}}</p>
+                                <p class="m-0 text-white">{{timeline_post.email}}</p>
                             </div>
                             <div class="bg-light p-2 rounded-bottom w-100">
                                 <p class="m-0 py-2">{{timeline_post.content}}</p>
