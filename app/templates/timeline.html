@@ -1,0 +1,72 @@
+{% extends "layout.html" %} 
+{% set active_page = "timeline" %}
+
+{% block head %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+  crossorigin="anonymous"
+/>
+{% endblock %} 
+
+{% block content %}
+
+<div class="container col-xxl-8 px-4 pt-5">
+  <div
+    class="row d-flex flex-lg-row align-items-center justify-content-center flex-wrap g-5 py-0"
+  >
+    <div class="d-flex flex-column align-items-center justify-content-start border border-secondary rounded p-2 mx-2">
+        <h3>Create a Timeline Entry</h3>
+        <form class="d-flex flex-column align-items-center w-75" action="/api/timeline_post" method="post">
+
+            <div class="d-flex flex-row flex-wrap justify-content-around w-100">
+                <div class="d-flex flex-column">
+                    <label for="fname">Name</label>
+                    <input type="text" id="fname" name="fname" placeholder="Name"><br>
+
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="femail">Email</label>
+                    <input type="text" id="femail" name="femail" placeholder="Email"><br>
+                </div>
+            </div>
+            <div class="align-self-start w-100">
+                <label for="fcontent">Content</label><br>
+                <textarea class="w-100" id="fcontent" name="fcontent" rows="3" cols="50">I am happy to announce...</textarea><br>
+            </div>
+
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="d-flex flex-column align-items-center justify-content-start m-5">
+        <h3 class="py-3">Timeline Posts</h3>
+        {% for timeline_post in timeline_posts %}
+       
+            <div class="d-flex flex-column align-items-center justify-content-start w-75 flex-wrap">
+                <div class="d-flex flex-column align-items-start w-100">
+                    <p>{{timeline_post.created_at[:-12]}}</p>
+                    <div class="rounded w-100" style="background-color: #85775f;">
+                        <div class="d-flex flex-column align-items-start justify-content-start w-100" >
+                            <div class="d-flex flex-row align-items-start justify-content-between w-100 p-2">
+                                <p>{{timeline_post.name}}</p>
+                                <p>{{timeline_post.email}}</p>
+                            </div>
+                            <div class="bg-light p-2 rounded-bottom w-100">
+                                <p>{{timeline_post.content}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            
+            <i class="fa fa-long-arrow-up p-2" aria-hidden="true"></i>
+        
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -49,13 +49,14 @@
 						('/', 'home', 'Home'),
 						('/my-work', 'my-work', 'My Work'),
 						('/about', 'about', 'About'),
-						('/contact', 'contact', 'Contact')
+						('/contact', 'contact', 'Contact'),
+						('/timeline', 'timeline', 'Timeline')
 					] -%}
 					
 					{% set active_page = active_page|default('index') -%}
 					
 					{% for href, id, caption in navigation_bar %}
-						{% if (id != 'home' and id != 'contact') %}
+						{% if (id != 'home' and id != 'timeline') %}
 							<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
 							<li>
 								<a href="{{ href|e }}"
@@ -74,7 +75,7 @@
 								</a>
 							</li>
 						{% endif %}
-						{% if (id == 'contact') %}
+						{% if (id == 'timeline') %}
 							<li><p class="fs-6 m-0 mt-2 text-muted fw-lighter">/</p></li>
 							<li>
 								<a href="{{ href|e }}"
