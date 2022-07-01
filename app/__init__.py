@@ -1,18 +1,23 @@
 import os
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, Response
 import requests
 from dotenv import load_dotenv
 from itsdangerous import json
 from peewee import *
 from playhouse.shortcuts import model_to_dict
 import datetime
+import re
 
 
 load_dotenv()
 app = Flask(__name__)
 
-#db connection
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    #db connection
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
     user=os.getenv("MYSQL_USER"),
     password=os.getenv("MYSQL_PASSWORD"),
     host=os.getenv("MYSQL_HOST"),
@@ -172,6 +177,22 @@ def post_time_line_post():
     name = request.form.get("name")
     email = request.form.get("email")
     content = request.form.get("content")
+
+    email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+
+    # Check that fields are not empty
+    if not name or name == "":
+        res = "Invalid name"
+        return res, 400, {'ContentType':'text/html'}
+
+    if not email or email == "" or not re.fullmatch(email_regex, email):
+        res = "Invalid email"
+        return res, 400, {'ContentType':'text/html'}
+
+    if not content or content == "":
+        res = "Invalid content"
+        return res, 400, {'ContentType':'text/html'}
+
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
