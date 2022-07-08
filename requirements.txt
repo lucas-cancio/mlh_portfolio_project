@@ -3,7 +3,7 @@ cffi==1.15.0
 charset-normalizer==2.0.12
 click==8.0.1
 cryptography==37.0.2
-dataclasses==0.8
+dataclasses==0.6
 Flask==2.0.1
 idna==3.3
 importlib-metadata==4.8.3
