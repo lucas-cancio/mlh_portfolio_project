@@ -90,7 +90,7 @@ projects = [Project(
             _title = "Game Development Projects",
             _id = "GameDev",
             _descriptions = [{"title": "What I do?", "content": "I am a hobbyist game developer with a particular affinity for the programming aspect of making games."},
-                            {"title": "What I use?", "content": "I primarily use the Unity engine, which uses C# for scripting."},
+                            {"title": "What I use?", "content": "I primarily use C# for scripting within the Unity game engine."},
                             {"title": "What I have made?", "content": "I have made games for both personal projects and school projects. I have also published Unity packages to the Unity Asset Store for other creators to use."}],
             _siteURL = "",
             _githubURL = "",
