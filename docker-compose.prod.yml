@@ -15,8 +15,14 @@ services:
     container_name: mysql
     image: mariadb
     restart: always
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
     env_file:
       - .env
+    environment:
+      - MYSQL_ROOT_HOST:'%'
     volumes:
       - mydatabase:/var/lib/mysql
 
