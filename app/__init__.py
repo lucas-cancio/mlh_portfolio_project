@@ -173,7 +173,7 @@ def timeline():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    # print("Creating new timeline post")
+    # print("Creating new timeline post") #dummy change
     name = request.form.get("name")
     email = request.form.get("email")
     content = request.form.get("content")
