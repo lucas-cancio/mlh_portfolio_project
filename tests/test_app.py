@@ -44,25 +44,13 @@ class AppTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post", data=post_data)
 
-        log.debug(response)
-
-        assert response.status_code == 200
-        assert response.is_json
-
-        json = response.get_json()
-
-        # Check that it's pulling new post from db
-
-        assert "id" in json
-        assert "created_at" in json
-
         # Test /timeline
 
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
 
-        assert '<textarea class="w-100" id="fcontent" name="fcontent" rows="3" cols="50">I am happy to announce...</textarea>' in html
+        assert '<textarea class="w-100" id="content" name="fcontent" rows="3" cols="50">I am happy to announce...</textarea>' in html
         
         assert '<h3 class="py-3">Timeline Posts</h3>' in html
 

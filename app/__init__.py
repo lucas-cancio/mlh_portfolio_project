@@ -15,6 +15,7 @@ app = Flask(__name__)
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
     mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+
 else:
     #db connection
     mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
@@ -138,8 +139,10 @@ educations = [Education("University of Florida", "May 2023", "Bachelor's of Scie
 skills = ["JavaScript", "Flask", "Python", "React", "NodeJS", "MySQL", "C++", "HTML", "CSS", "Git", "Linux"]
 
 def fetch_time_line_posts():
-    timeline_posts = requests.get("http://localhost:5000/api/timeline_post")
-    timeline_posts = json.loads(timeline_posts.text)['timeline_posts']
+    # timeline_posts = requests.get("http://localhost:5000/api/timeline_post")
+    # timeline_posts = json.loads(timeline_posts.text)['timeline_posts']
+    timeline_posts = get_time_line_posts()
+    timeline_posts = timeline_posts['timeline_posts']
     return timeline_posts
 
 @app.route('/')
@@ -160,12 +163,12 @@ def contact():
 
 @app.route('/timeline', methods=["GET", "POST"])
 def timeline():
-    if request.method == 'POST':
-        name = request.form.get("fname")
-        email = request.form.get("femail")
-        content = request.form.get("fcontent")
-        timeline_post_info = {'name': name, 'email': email, 'content': content}
-        new_timeline_post = requests.post("http://localhost:5000/api/timeline_post", timeline_post_info)
+    # if request.method == 'POST':
+    #     name = request.form.get("fname")
+    #     email = request.form.get("femail")
+    #     content = request.form.get("fcontent")
+    #     timeline_post_info = {'name': name, 'email': email, 'content': content}
+    #     new_timeline_post = requests.post("http://localhost:5000/api/timeline_post", timeline_post_info)
 
     timeline_posts = fetch_time_line_posts()
 
@@ -195,11 +198,12 @@ def post_time_line_post():
 
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
-    return model_to_dict(timeline_post)
+    # return model_to_dict(timeline_post)
+    return timeline()
 
 
 @app.route('/api/timeline_post', methods=['GET'])
-def get_time_line_post():
+def get_time_line_posts():
     return {
         'timeline_posts': [
             model_to_dict(p)
