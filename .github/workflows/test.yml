@@ -31,7 +31,7 @@ jobs:
         run: set TESTING="true"
 
       - name: Run flask program
-        run: flask run
+        run: python3-virtualenv/bin/flask run
 
       - name: Run Tests
         run: ./run_tests.sh
