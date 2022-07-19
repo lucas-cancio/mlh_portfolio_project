@@ -49,8 +49,6 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-
-        assert '<textarea class="w-100" id="content" name="fcontent" rows="3" cols="50">I am happy to announce...</textarea>' in html
         
         assert '<h3 class="py-3">Timeline Posts</h3>' in html
 
