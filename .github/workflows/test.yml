@@ -27,5 +27,11 @@ jobs:
       - name: Install dependencies
         run: python3-virtualenv/bin/pip install -r requirements.txt
 
+      - name: Set to Testing Environment
+        run: set TESTING="true"
+
+      - name: Run flask program
+        run: flask run
+
       - name: Run Tests
         run: ./run_tests.sh
